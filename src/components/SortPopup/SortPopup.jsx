@@ -1,6 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 
 const SortPopup = () => {
+  const [showPopup, setShowPopup] = useState(false);
+
+  const onShowPopup = () => {
+    setShowPopup(!showPopup);
+  };
+
   return (
     <div className="sort">
       <div className="sort__label">
@@ -17,15 +23,17 @@ const SortPopup = () => {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span>популярности</span>
+        <span onClick={() => onShowPopup()}>популярности</span>
       </div>
-      <div className="sort__popup">
-        <ul>
-          <li className="active">популярности</li>
-          <li>цене</li>
-          <li>алфавиту</li>
-        </ul>
-      </div>
+      {showPopup && (
+        <div className="sort__popup">
+          <ul>
+            <li className="active">популярности</li>
+            <li>цене</li>
+            <li>алфавиту</li>
+          </ul>
+        </div>
+      )}
     </div>
   );
 };
