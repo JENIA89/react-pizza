@@ -6,7 +6,7 @@ import {
   PizzaBlock,
   PizzaLoadingBlock,
 } from "../components";
-import { setCategory } from "../redux/actions/filters";
+import { setCategory, setSortBy } from "../redux/actions/filters";
 import { setAsyncPizzas } from "../redux/actions/pizzas";
 
 const categoryName = [
@@ -18,9 +18,9 @@ const categoryName = [
 ];
 
 const sortItems = [
-  { name: "популярности", type: "popular" },
-  { name: "цене", type: "price" },
-  { name: "алфавиту", type: "alphabet" },
+  { name: "популярности", type: "popular", order: "desc" },
+  { name: "цене", type: "price", order: "desc" },
+  { name: "алфавиту", type: "name", order: "asc" },
 ];
 
 const Home = () => {
@@ -29,20 +29,30 @@ const Home = () => {
   const isLoaded = useSelector(({ pizzas }) => pizzas.isLoaded);
   const { category, sortBy } = useSelector(({ filters }) => filters);
 
-  console.log(category, sortBy);
-
   useEffect(() => {
-    dispatch(setAsyncPizzas());
-  }, []);
+    dispatch(setAsyncPizzas(sortBy, category));
+  }, [category, sortBy]);
 
   const onSelectCategory = useCallback((index) => {
     dispatch(setCategory(index));
   }, []);
+
+  const onSelectSortType = useCallback((type) => {
+    dispatch(setSortBy(type));
+  }, []);
   return (
     <div className="container">
       <div className="content__top">
-        <Categories onClickItem={onSelectCategory} items={categoryName} />
-        <SortPopup items={sortItems} />
+        <Categories
+          activeCategory={category}
+          onClickCategory={onSelectCategory}
+          items={categoryName}
+        />
+        <SortPopup
+          items={sortItems}
+          activeSortItem={sortBy.type}
+          onClickSortItem={onSelectSortType}
+        />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">
