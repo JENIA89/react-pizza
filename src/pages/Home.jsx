@@ -6,6 +6,7 @@ import {
   PizzaBlock,
   PizzaLoadingBlock,
 } from "../components";
+import { addPizza } from "../redux/actions/cart";
 import { setCategory, setSortBy } from "../redux/actions/filters";
 import { setAsyncPizzas } from "../redux/actions/pizzas";
 
@@ -26,6 +27,7 @@ const sortItems = [
 const Home = () => {
   const dispatch = useDispatch();
   const items = useSelector((state) => state.pizzas.items);
+  const cartItems = useSelector(({ cart }) => cart.items);
   const isLoaded = useSelector(({ pizzas }) => pizzas.isLoaded);
   const { category, sortBy } = useSelector(({ filters }) => filters);
 
@@ -40,6 +42,10 @@ const Home = () => {
   const onSelectSortType = useCallback((type) => {
     dispatch(setSortBy(type));
   }, []);
+
+  const addPizzaToCart = (obj) => {
+    dispatch(addPizza(obj));
+  };
   return (
     <div className="container">
       <div className="content__top">
@@ -57,7 +63,14 @@ const Home = () => {
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">
         {isLoaded
-          ? items.map((obj) => <PizzaBlock key={obj.id} {...obj} />)
+          ? items.map((obj) => (
+              <PizzaBlock
+                addPizzaToCart={addPizzaToCart}
+                addedCountPizzas={cartItems[obj.id] && cartItems[obj.id].length}
+                key={obj.id}
+                {...obj}
+              />
+            ))
           : Array(10)
               .fill(0)
               .map((item, index) => (
