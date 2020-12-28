@@ -2,13 +2,15 @@
 
 Front end
 - React
+- React hooks
+- React Router
 - React-content-loader
 - Redux
 - Redux-thunk
 - React-router-dom
 - Prop-types
 - Scss
-- ClassNames
+- classnames
 - Axios
 
 Back end
