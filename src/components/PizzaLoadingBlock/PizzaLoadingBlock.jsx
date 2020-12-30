@@ -20,5 +20,4 @@ const PizzaLoadingBlock = () => {
     </ContentLoader>
   );
 };
-
 export default PizzaLoadingBlock;

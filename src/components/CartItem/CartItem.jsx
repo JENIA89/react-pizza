@@ -12,7 +12,6 @@ const CartItem = ({
   const handleRemove = () => {
     onRemove(id);
   };
-
   return (
     <div className="cart__item">
       <div className="cart__item-img">

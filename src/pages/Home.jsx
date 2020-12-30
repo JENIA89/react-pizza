@@ -33,15 +33,21 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(setAsyncPizzas(sortBy, category));
-  }, [category, sortBy]);
+  }, [category, sortBy, dispatch]);
 
-  const onSelectCategory = useCallback((index) => {
-    dispatch(setCategory(index));
-  }, []);
+  const onSelectCategory = useCallback(
+    (index) => {
+      dispatch(setCategory(index));
+    },
+    [dispatch]
+  );
 
-  const onSelectSortType = useCallback((type) => {
-    dispatch(setSortBy(type));
-  }, []);
+  const onSelectSortType = useCallback(
+    (type) => {
+      dispatch(setSortBy(type));
+    },
+    [dispatch]
+  );
 
   const addPizzaToCart = (obj) => {
     dispatch(addPizza(obj));

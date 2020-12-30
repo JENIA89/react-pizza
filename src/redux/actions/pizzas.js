@@ -1,4 +1,5 @@
 import axios from "axios";
+import { SET_PIZZAS, SET_LOADED } from "./actionTypes";
 
 export const setAsyncPizzas = (sortBy, category) => {
   return (dispatch) => {
@@ -14,11 +15,11 @@ export const setAsyncPizzas = (sortBy, category) => {
 };
 
 export const setPizzas = (items) => ({
-  type: "SET_PIZZAS",
+  type: SET_PIZZAS,
   payload: items,
 });
 
 export const setLoaded = (payload) => ({
-  type: "SET_LOADED",
+  type: SET_LOADED,
   payload,
 });

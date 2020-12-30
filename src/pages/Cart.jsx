@@ -1,9 +1,9 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { CartItem } from "../components";
 import { clearCart, removeCartItem } from "../redux/actions/cart";
 import CartEmptyImg from "../assets/img/empty-cart.png";
-import { Link } from "react-router-dom";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -95,7 +95,6 @@ const Cart = () => {
                     strokeLinejoin="round"
                   />
                 </svg>
-
                 <span onClick={onClearCart}>Очистить корзину</span>
               </div>
             </div>
